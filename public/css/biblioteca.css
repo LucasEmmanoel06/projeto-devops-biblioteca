@@ -1,0 +1,42 @@
+/* Complementos da tela biblioteca.html. Base: style.css (login/cadastro). */
+
+.painel-topo { align-items: flex-start; }
+.cartao-largo { max-width: 520px; }
+
+.divisor { border-top: 1.5px solid var(--borda); margin: 1.75rem 0 1.4rem; }
+
+.contador { margin: 0 0 .75rem; color: var(--texto-suave); font-size: .95rem; }
+
+.lista-livros { list-style: none; margin: 0; padding: 0; display: grid; gap: .7rem; }
+.livro {
+  --cor: var(--tinta-2);
+  display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+  background: var(--branco);
+  border: 1.5px solid var(--borda);
+  border-left: 10px solid var(--cor);
+  border-radius: 4px 8px 8px 4px;
+  padding: .8rem 1rem .8rem 1.1rem;
+}
+.livro-info { min-width: 0; }
+.livro-titulo {
+  font-family: var(--fonte-titulo); font-weight: 400;
+  font-size: 1.1rem; line-height: 1.25; margin: 0; color: var(--tinta);
+  overflow-wrap: anywhere;
+}
+.livro-meta { margin: .15rem 0 0; color: var(--texto-suave); font-size: .92rem; overflow-wrap: anywhere; }
+
+.botao-excluir {
+  flex: none;
+  font: inherit; font-size: .9rem; font-weight: 600;
+  background: none; color: var(--erro);
+  border: 1.5px solid var(--erro); border-radius: 6px;
+  padding: .4rem .8rem; cursor: pointer; transition: background .15s, color .15s;
+}
+.botao-excluir:hover { background: var(--erro); color: #fff; }
+
+.vazio {
+  text-align: center; color: var(--texto-suave);
+  border: 1.5px dashed var(--borda); border-radius: 8px;
+  padding: 1.75rem 1rem; margin: 0;
+}
+.vazio[hidden] { display: none; }

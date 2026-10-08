@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;600&family=Young+Serif&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/biblioteca.css">
+  <title>Meus livros · Biblioteca</title>
+</head>
+
+<body>
+  <div class="pagina">
+    <aside class="estante">
+      <div>
+        <h1>Seu acervo, em ordem.</h1>
+        <p>Adicione, busque e remova os livros que você tem.</p>
+      </div>
+      <div class="lombadas" aria-hidden="true">
+        <span class="lombada" style="--h:150px;--cor:#2f5d62"></span>
+        <span class="lombada" style="--h:210px;--cor:#7a2e3b"></span>
+        <span class="lombada" style="--h:130px;--cor:#d8c9a3"></span>
+        <span class="lombada" style="--h:240px;--cor:#4a5a7a"></span>
+        <span class="lombada" style="--h:180px;--cor:#b9791a"></span>
+        <span class="lombada" style="--h:200px;--cor:#2f5d62"></span>
+        <span class="lombada" style="--h:140px;--cor:#7a2e3b"></span>
+        <span class="lombada inclinada" style="--h:220px;--cor:#d8c9a3"></span>
+      </div>
+    </aside>
+
+    <main class="painel painel-topo">
+      <section class="cartao cartao-largo">
+        <h2>Meus livros</h2>
+        <p class="sub">Cadastre um livro e ele aparece na lista abaixo.</p>
+
+        <div id="aviso" class="aviso" role="alert" hidden></div>
+
+        <form id="form-livro" novalidate>
+          <div class="campo">
+            <label for="titulo">Título</label>
+            <div class="entrada">
+              <input id="titulo" name="titulo" type="text" required maxlength="200" aria-describedby="erro-titulo">
+            </div>
+            <p id="erro-titulo" class="erro-campo"></p>
+          </div>
+
+          <div class="campo">
+            <label for="autor">Autor</label>
+            <div class="entrada">
+              <input id="autor" name="autor" type="text" required maxlength="150" aria-describedby="erro-autor">
+            </div>
+            <p id="erro-autor" class="erro-campo"></p>
+          </div>
+
+          <div class="campo">
+            <label for="ano">Ano <span class="ajuda">(opcional)</span></label>
+            <div class="entrada">
+              <input id="ano" name="ano" type="number" inputmode="numeric" min="1" max="2100" aria-describedby="erro-ano">
+            </div>
+            <p id="erro-ano" class="erro-campo"></p>
+          </div>
+
+          <button class="botao" type="submit">Adicionar livro</button>
+        </form>
+
+        <div class="divisor"></div>
+
+        <div class="campo">
+          <label for="busca">Buscar livro</label>
+          <div class="entrada">
+            <input id="busca" type="search" placeholder="Digite o título ou o autor" autocomplete="off">
+          </div>
+        </div>
+
+        <p id="contador" class="contador" aria-live="polite"></p>
+        <ul id="lista" class="lista-livros"></ul>
+        <p id="vazio" class="vazio" hidden></p>
+
+        <p class="troca"><a href="index.html">Sair</a></p>
+      </section>
+    </main>
+  </div>
+
+  <script src="js/config.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/biblioteca.js"></script>
+</body>
+</html>
