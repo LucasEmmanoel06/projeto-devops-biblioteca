@@ -11,4 +11,6 @@ app.get('/health', (req, res) => {res.status(200).json({ status: 'ok' });});
 // Frontend estático
 app.use(express.static(path.join(__dirname, '../public')));
 
+app.use(errorHandler);
+
 module.exports = app;
