@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;600&family=Young+Serif&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <title>Criar conta · Biblioteca</title>
+</head>
+<body>
+  <div class="pagina">
+    <aside class="estante">
+      <div>
+        <h1>Comece a sua estante.</h1>
+        <p>Crie uma conta para cadastrar os livros que você tem.</p>
+      </div>
+      <div class="lombadas" aria-hidden="true">
+        <span class="lombada" style="--h:150px;--cor:#2f5d62"></span>
+        <span class="lombada" style="--h:210px;--cor:#7a2e3b"></span>
+        <span class="lombada" style="--h:130px;--cor:#d8c9a3"></span>
+        <span class="lombada" style="--h:240px;--cor:#4a5a7a"></span>
+        <span class="lombada" style="--h:180px;--cor:#b9791a"></span>
+        <span class="lombada" style="--h:200px;--cor:#2f5d62"></span>
+        <span class="lombada" style="--h:140px;--cor:#7a2e3b"></span>
+        <span class="lombada inclinada" style="--h:220px;--cor:#d8c9a3"></span>
+      </div>
+    </aside>
+
+    <main class="painel">
+      <section class="cartao">
+        <h2>Criar conta</h2>
+        <p class="sub">Leva menos de um minuto.</p>
+
+        <div id="aviso" class="aviso" role="alert" hidden></div>
+
+        <form id="form-cadastro" novalidate>
+          <div class="campo">
+            <label for="nome">Nome</label>
+            <div class="entrada">
+              <input id="nome" name="nome" type="text" autocomplete="name" required aria-describedby="erro-nome">
+            </div>
+            <p id="erro-nome" class="erro-campo"></p>
+          </div>
+
+          <div class="campo">
+            <label for="email">E-mail</label>
+            <div class="entrada">
+              <input id="email" name="email" type="email" autocomplete="email" required aria-describedby="erro-email">
+            </div>
+            <p id="erro-email" class="erro-campo"></p>
+          </div>
+
+          <div class="campo">
+            <label for="senha">Senha <span class="ajuda">(mínimo de 8 caracteres)</span></label>
+            <div class="entrada com-botao">
+              <input id="senha" name="senha" type="password" autocomplete="new-password" required aria-describedby="erro-senha">
+              <button type="button" class="ver-senha" data-alvo="senha" aria-label="Mostrar senha">Mostrar</button>
+            </div>
+            <p id="erro-senha" class="erro-campo"></p>
+          </div>
+
+          <div class="campo">
+            <label for="confirmar">Confirmar senha</label>
+            <div class="entrada com-botao">
+              <input id="confirmar" name="confirmar" type="password" autocomplete="new-password" required aria-describedby="erro-confirmar">
+              <button type="button" class="ver-senha" data-alvo="confirmar" aria-label="Mostrar confirmação de senha">Mostrar</button>
+            </div>
+            <p id="erro-confirmar" class="erro-campo"></p>
+          </div>
+
+          <button id="btn-enviar" class="botao" type="submit">Criar conta</button>
+        </form>
+
+        <p class="troca">Já tem conta? <a href="index.html">Entrar</a></p>
+      </section>
+    </main>
+  </div>
+
+  <script src="js/config.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/cadastro.js"></script>
+</body>
+</html>
