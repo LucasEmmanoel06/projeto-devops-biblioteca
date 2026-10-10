@@ -2,32 +2,24 @@
   const CAMPOS = ["titulo", "autor", "ano"];
   const CORES = ["#2f5d62", "#7a2e3b", "#d8c9a3", "#4a5a7a", "#b9791a"];
 
-  // "Banco de dados" provisório: começa vazio e vive só na memória da página.
-  // (Ao recarregar a página, a lista volta a ficar vazia.)
   let livros = [];
-  let proximoId = 1;
   let termo = "";
+  let carregamento = 0;
 
   const lista = document.getElementById("lista");
   const vazio = document.getElementById("vazio");
   const contador = document.getElementById("contador");
 
-  // ---- Mostrar a lista (já filtrada pela busca) ----
   function renderizar() {
-    const t = termo.toLowerCase();
-    const visiveis = livros.filter(l =>
-      l.titulo.toLowerCase().includes(t) || l.autor.toLowerCase().includes(t));
-
-    lista.replaceChildren(...visiveis.map(criarItem));
+    lista.replaceChildren(...livros.map(criarItem));
 
     contador.textContent = livros.length === 0 ? "" :
-      (termo ? visiveis.length + " de " + livros.length : livros.length) +
-      (livros.length === 1 ? " livro" : " livros");
+      livros.length + (livros.length === 1 ? " livro" : " livros");
 
-    if (visiveis.length === 0) {
-      vazio.textContent = livros.length === 0
-        ? "Sua estante está vazia. Adicione o primeiro livro acima."
-        : "Nenhum livro encontrado. Tente outro título ou autor.";
+    if (livros.length === 0) {
+      vazio.textContent = termo
+        ? "Nenhum livro encontrado. Tente outro título ou autor."
+        : "Sua estante está vazia. Adicione o primeiro livro acima.";
       vazio.hidden = false;
     } else {
       vazio.hidden = true;
@@ -63,14 +55,13 @@
     return li;
   }
 
-  // ---- Adicionar ----
   function validar({ titulo, autor, ano }) {
     let valido = true;
     if (!titulo) { Form.mostrarErroCampo("titulo", "Informe o título do livro."); valido = false; }
     if (!autor) { Form.mostrarErroCampo("autor", "Informe o autor do livro."); valido = false; }
     if (ano !== "") {
       const n = Number(ano);
-      if (!Number.isInteger(n) || n < 1 || n > 2100) {
+      if (!Number.isInteger(n) || n < 1 || n > new Date().getFullYear()) {
         Form.mostrarErroCampo("ano", "Digite um ano válido, como 1999.");
         valido = false;
       }
@@ -78,7 +69,30 @@
     return valido;
   }
 
-  document.getElementById("form-livro").addEventListener("submit", (ev) => {
+  function lidarComSessaoExpirada(resp) {
+    if (resp.status !== 401) return false;
+    Sessao.encerrar();
+    window.location.replace("index.html");
+    return true;
+  }
+
+  async function carregarLivros() {
+    const idCarregamento = ++carregamento;
+    const resp = await Api.listarLivros(termo);
+    if (idCarregamento !== carregamento) return;
+    if (lidarComSessaoExpirada(resp)) return;
+
+    if (!resp.ok || !Array.isArray(resp.dados)) {
+      Form.mostrarAviso("erro", (resp.dados && resp.dados.erro) ||
+        "Não foi possível carregar os livros. Tente novamente.");
+      return;
+    }
+
+    livros = resp.dados;
+    renderizar();
+  }
+
+  document.getElementById("form-livro").addEventListener("submit", async (ev) => {
     ev.preventDefault();
     Form.limparErros(CAMPOS);
     Form.esconderAviso();
@@ -95,36 +109,57 @@
       return;
     }
 
-    livros.unshift({
-      id: proximoId++,
+    const botao = ev.target.querySelector("button[type=submit]");
+    botao.disabled = true;
+    botao.textContent = "Adicionando…";
+    const resp = await Api.criarLivro({
       titulo: dados.titulo,
       autor: dados.autor,
       ano: dados.ano === "" ? null : Number(dados.ano)
     });
 
+    botao.disabled = false;
+    botao.textContent = "Adicionar livro";
+    if (lidarComSessaoExpirada(resp)) return;
+    if (!resp.ok) {
+      Form.mostrarAviso("erro", (resp.dados && resp.dados.erro) ||
+        "Não foi possível adicionar o livro. Tente novamente.");
+      return;
+    }
+
     ev.target.reset();
     document.getElementById("titulo").focus();
     Form.mostrarAviso("sucesso", "Livro adicionado.");
-    renderizar();
+    await carregarLivros();
   });
 
-  // ---- Buscar ----
   document.getElementById("busca").addEventListener("input", (ev) => {
     termo = ev.target.value.trim();
-    renderizar();
+    carregarLivros();
   });
 
-  // ---- Excluir ----
-  function excluir(id) {
+  async function excluir(id) {
     const livro = livros.find(l => l.id === id);
     if (!livro || !window.confirm("Excluir \"" + livro.titulo + "\"?")) return;
-    livros = livros.filter(l => l.id !== id);
+
+    const resp = await Api.excluirLivro(id);
+    if (lidarComSessaoExpirada(resp)) return;
+    if (!resp.ok) {
+      Form.mostrarAviso("erro", (resp.dados && resp.dados.erro) ||
+        "Não foi possível excluir o livro. Tente novamente.");
+      return;
+    }
+
     Form.mostrarAviso("sucesso", "Livro excluído.");
-    renderizar();
+    await carregarLivros();
   }
 
-  // ---- Sair ----
   document.querySelector('.troca a').addEventListener("click", () => Sessao.encerrar());
 
-  renderizar();
+  if (!Sessao.ativa()) {
+    window.location.replace("index.html");
+    return;
+  }
+
+  carregarLivros();
 })();

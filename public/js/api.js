@@ -49,6 +49,17 @@
       requisitar("/api/auth/cadastro", { metodo: "POST", corpo: { nome, email, senha } }),
     entrar: (email, senha) =>
       requisitar("/api/auth/login", { metodo: "POST", corpo: { email, senha } }),
+    listarLivros: (busca = "") =>
+      requisitar("/api/livros" + (busca ? "?busca=" + encodeURIComponent(busca) : ""), {
+        autenticado: true
+      }),
+    criarLivro: (livro) =>
+      requisitar("/api/livros", { metodo: "POST", corpo: livro, autenticado: true }),
+    excluirLivro: (id) =>
+      requisitar("/api/livros/" + encodeURIComponent(id), {
+        metodo: "DELETE",
+        autenticado: true
+      }),
     requisitar
   };
 
