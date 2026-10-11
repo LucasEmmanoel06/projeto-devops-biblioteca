@@ -3,7 +3,7 @@
 <p align="center">
   <img src="https://img.shields.io/badge/Node.js-18.x-339933?style=for-the-badge&logo=nodedotjs&logoColor=white" alt="Node.js" />
   <img src="https://img.shields.io/badge/Express.js-000000?style=for-the-badge&logo=express&logoColor=white" alt="Express.js" />
-  <img src="https://img.shields.io/badge/SQL-Database-4479A1?style=for-the-badge&logo=postgresql&logoColor=white" alt="Database" />
+  <img src="https://img.shields.io/badge/MySQL-Database-4479A1?style=for-the-badge&logo=mysql&logoColor=white" alt="MySQL" />
   <img src="https://img.shields.io/badge/JWT-Secure-black?style=for-the-badge&logo=JSON%20web%20tokens" alt="JWT" />
   <img src="https://img.shields.io/badge/Licen%C3%A7a-MIT-blue?style=for-the-badge" alt="Licença MIT" />
 </p>
@@ -130,8 +130,8 @@ Abra o `.env` e configure os parâmetros de ligação à sua base de dados e a c
 Execute o ficheiro DDL `src/db/schema.sql` na sua base de dados para criar as tabelas necessárias:
 
 ```bash
-# Exemplo com PostgreSQL via terminal:
-psql -U o_seu_utilizador -d a_sua_base_de_dados -f src/db/schema.sql
+# Exemplo com MySQL via terminal:
+mysql -u o_seu_utilizador -p < src/db/schema.sql
 ```
 
 ### 5. Iniciar a aplicação
@@ -157,7 +157,7 @@ As principais chaves de configuração suportadas pela aplicação incluem:
 | :--- | :--- | :--- |
 | `PORT` | Porta onde o servidor irá escutar | `3000` |
 | `DB_HOST` | Endereço do anfitrião da base de dados | `localhost` |
-| `DB_PORT` | Porta de comunicação da base de dados | `5432` |
+| `DB_PORT` | Porta de comunicação da base de dados | `3306` |
 | `DB_USER` | Utilizador da base de dados | `root` |
 | `DB_PASSWORD` | Palavra-passe da base de dados | `root` |
 | `DB_NAME` | Nome da base de dados | `biblioteca` |
