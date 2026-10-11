@@ -206,5 +206,5 @@ Este projeto está distribuído sob a licença **MIT**[cite: 1]. Consulte o fich
 
 ## 👤 Autor
 
-Desenvolvido por **Lucas Emmanoel**  
-- **GitHub:** [@LucasEmmanoel06](https://github.com/LucasEmmanoel06)
+Desenvolvido por **Lucas Emmanoel** , **Lucas Henrique Dias** , **Gabriela Pires** , **Miqueias Eduardo** e **Mariana Monteiro** 
+- **GitHub:** [@LucasEmmanoel06](https://github.com/LucasEmmanoel06), [@Lucas-henriquedias](https://github.com/lucas-henriquedias), [@Gavvdev](https://github.com/gavvdev), [@Miqueias-eduardo](https://github.com/miqueias-eduardo) e [@Mariana-asm](https://github.com/Mariana-asm)
