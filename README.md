@@ -206,5 +206,14 @@ Este projeto está distribuído sob a licença **MIT**[cite: 1]. Consulte o fich
 
 ## 👤 Autor
 
-Desenvolvido por **Lucas Emmanoel** , **Lucas Henrique Dias** , **Gabriela Pires** , **Miqueias Eduardo** e **Mariana Monteiro** 
-- **GitHub:** [@LucasEmmanoel06](https://github.com/LucasEmmanoel06), [@Lucas-henriquedias](https://github.com/lucas-henriquedias), [@Gavvdev](https://github.com/gavvdev), [@Miqueias-eduardo](https://github.com/miqueias-eduardo) e [@Mariana-asm](https://github.com/Mariana-asm)
+Este projeto foi desenvolvido colaborativamente por:
+
+| Colaborador | GitHub | Função |
+| :--- | :--- | :--- |
+| Lucas Emmanoel | [@LucasEmmanoel06](https://github.com/LucasEmmanoel06) | Tech Lead |
+| Emanuel Gondim | [@egondimjraws](https://github.com/egondimjraws) | Testes Unitários |
+| Gabriela Pires | [@Gavvdev](https://github.com/gavvdev) | Banco de Dados |
+| Lucas Henrique Dias | [@Lucas-henriquedias](https://github.com/lucas-henriquedias) | Frontend |
+| Mariana Monteiro | [@Mariana-asm](https://github.com/Mariana-asm) | README.md |
+| Miqueias Eduardo | [@Miqueias-eduardo](https://github.com/miqueias-eduardo) | Backend |
+| Nayara Medeiros | [@nk-medeiros](https://github.com/nk-medeiros) | Frontend |
