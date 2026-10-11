@@ -158,8 +158,8 @@ As principais chaves de configuração suportadas pela aplicação incluem:
 | `PORT` | Porta onde o servidor irá escutar | `3000` |
 | `DB_HOST` | Endereço do anfitrião da base de dados | `localhost` |
 | `DB_PORT` | Porta de comunicação da base de dados | `5432` |
-| `DB_USER` | Utilizador da base de dados | `postgres` |
-| `DB_PASSWORD` | Palavra-passe da base de dados | `a_sua_palavra_passe` |
+| `DB_USER` | Utilizador da base de dados | `root` |
+| `DB_PASSWORD` | Palavra-passe da base de dados | `root` |
 | `DB_NAME` | Nome da base de dados | `biblioteca` |
 | `JWT_SECRET` | Chave secreta para assinatura dos tokens JWT | `chave_secreta_segura` |
 
