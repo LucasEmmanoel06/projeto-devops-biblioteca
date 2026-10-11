@@ -171,20 +171,22 @@ Para mais detalhes sobre contratos e formatos de resposta, consulte a pasta [`do
 
 ### Autenticação (`/api/auth`)
 
-| Método | Rota | Descrição | Requer Autenticação |
-| :--- | :--- | :--- | :---: |
-| `POST` | `/api/auth/register` | Regista um novo utilizador | Não |
-| `POST` | `/api/auth/login` | Inicia sessão e retorna o token de acesso | Não |
+| Método | Rota | Descrição |
+| :--- | :--- | :--- |
+| `POST` | `/api/auth/register` | Regista um novo utilizador |
+| `POST` | `/api/auth/login` | Inicia sessão e retorna o token de acesso |
 
 ### Livros (`/api/livros`)
 
-| Método | Rota | Descrição | Requer Autenticação |
-| :--- | :--- | :--- | :---: |
-| `GET` | `/api/livros` | Lista todos os livros disponíveis | Não |
-| `GET` | `/api/livros/:id` | Obtém os detalhes de um livro específico | Não |
-| `POST` | `/api/livros` | Regista um novo livro no acervo | **Sim** |
-| `PUT` | `/api/livros/:id` | Atualiza os dados de um livro existente | **Sim** |
-| `DELETE` | `/api/livros/:id` | Remove um livro do acervo | **Sim** |
+(Requer Autenticação)
+
+| Método | Rota | Descrição |
+| :--- | :--- | :--- |
+| `GET` | `/api/livros` | Lista todos os livros disponíveis |
+| `GET` | `/api/livros/:id` | Obtém os detalhes de um livro específico |
+| `POST` | `/api/livros` | Regista um novo livro no acervo |
+| `PUT` | `/api/livros/:id` | Atualiza os dados de um livro existente |
+| `DELETE` | `/api/livros/:id` | Remove um livro do acervo |
 
 ---
 
