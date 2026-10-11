@@ -96,7 +96,7 @@ projeto-devops-biblioteca/
 Certifique-se de ter instalado no seu ambiente de trabalho:
 - [Node.js](https://nodejs.org/) (versão 18.x LTS ou superior recomendada)
 - Gestor de pacotes [npm](https://www.npmjs.com/) ou [yarn]
-- Instância de base de dados relacional acessível
+- [MySQL Server](https://dev.mysql.com/downloads/installer/)
 
 ---
 
