@@ -20,9 +20,9 @@ Registro do que o sistema não faz, ou faz de forma simples, para que quem receb
 
 ## Banco de dados
 
-- O `schema.sql` apaga e recria as tabelas (`DROP TABLE`). Rodá-lo em um banco com dados reais apaga tudo.
+- O `db.sql` apaga e recria as tabelas (`DROP TABLE`). Rodá-lo em um banco com dados reais apaga tudo.
 - O script cria um usuário e livros de exemplo (`exemplo@email.com`, senha `Senha123`), destinados apenas a testes.
-- Não há sistema de migrações: mudanças no banco são feitas editando o `schema.sql`.
+- Não há sistema de migrações: mudanças no banco são feitas editando o `db.sql`.
 
 ## Arquitetura e execução
 

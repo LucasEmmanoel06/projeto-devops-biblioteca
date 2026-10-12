@@ -7,7 +7,7 @@ async function iniciar() {
     await db.query('SELECT 1');
   } catch (e) {
     console.error('Não foi possível conectar ao MySQL:', e.message);
-    console.error('Confira os dados DB_* no .env e se o banco foi criado (src/db/schema.sql).');
+    console.error('Confira os dados DB_* no .env e se o banco foi criado (db.sql).');
     process.exit(1);
   }
 
