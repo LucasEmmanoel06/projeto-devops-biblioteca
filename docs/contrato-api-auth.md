@@ -1,8 +1,6 @@
 # Contrato da API de autenticação
 
-Combinado entre **Frontend** e **Backend**. As telas `index.html` (login) e
-`cadastro.html` já consomem exatamente o que está descrito aqui. Se o backend
-precisar mudar algo, atualizem este arquivo e avisem o frontend.
+Combinado entre **Frontend** e **Backend**. As telas `index.html` (login) e `cadastro.html` consomem exatamente o que está descrito aqui. Se o backend mudar algo, atualizem este arquivo e avisem o frontend.
 
 Formato: JSON (`Content-Type: application/json`). Erros sempre no formato `{ "erro": "mensagem em português" }`.
 
@@ -15,11 +13,11 @@ Corpo:
 
 | Status | Quando | Corpo |
 |---|---|---|
-| 201 | Conta criada | `{ "id": 1, "nome": "Maria Silva", "email": "maria@exemplo.com" }` |
-| 400 | Campo ausente/inválido (senha < 8 caracteres, e-mail inválido...) | `{ "erro": "..." }` |
-| 409 | E-mail já cadastrado | `{ "erro": "E-mail já cadastrado." }` |
+| 201 | Conta criada | `{ "token": "<JWT>", "usuario": { "id": 1, "nome": "Maria Silva", "email": "maria@exemplo.com" } }` |
+| 400 | Nome vazio, e-mail inválido ou senha com menos de 6 caracteres | `{ "erro": "..." }` |
+| 409 | E-mail já cadastrado | `{ "erro": "Este e-mail já está cadastrado." }` |
 
-Regras: e-mail único; salvar apenas o **hash** da senha (`senha_hash`, ex.: bcrypt/argon2), nunca a senha.
+Regras: e-mail único (salvo em minúsculas); apenas o **hash** da senha é salvo (`senha_hash`, bcrypt), nunca a senha. Após o cadastro, o usuário já recebe o token.
 
 ## POST /api/auth/login
 
@@ -31,22 +29,18 @@ Corpo:
 | Status | Quando | Corpo |
 |---|---|---|
 | 200 | Credenciais corretas | `{ "token": "<JWT>", "usuario": { "id": 1, "nome": "Maria Silva", "email": "maria@exemplo.com" } }` |
-| 400 | Campo ausente | `{ "erro": "..." }` |
-| 401 | E-mail ou senha incorretos | `{ "erro": "E-mail ou senha incorretos." }` |
+| 401 | E-mail ou senha incorretos, ou campos ausentes | `{ "erro": "E-mail ou senha incorretos." }` |
 
-Use a mesma mensagem para e-mail inexistente e senha errada (não revelar quais e-mails existem).
+A mesma mensagem é usada para e-mail inexistente e senha errada, para não revelar quais e-mails existem.
 
 ## Rotas protegidas
 
-O frontend envia `Authorization: Bearer <token>` em toda rota de livros.
-Token inválido/expirado → `401`; o frontend deve encerrar a sessão e voltar ao login.
+O frontend envia `Authorization: Bearer <token>` em toda rota de livros. Token ausente, inválido ou expirado retorna `401`, e o frontend encerra a sessão e volta ao login. O token vale 7 dias.
 
 ## Sessão no frontend
 
-`localStorage`: `biblioteca_token` e `biblioteca_usuario`. Após o login, o usuário é
-redirecionado para `biblioteca.html` (tela de livros, feita por outro integrante).
+`localStorage`: `biblioteca_token` e `biblioteca_usuario`. Após o login ou cadastro, o usuário é redirecionado para `biblioteca.html`.
 
 ## CORS
 
-Se o frontend rodar em outra porta que o backend, habilite CORS para a origem do frontend
-e ajuste `API_BASE` em `frontend/js/config.js`. Com Docker Compose, o ideal é servir tudo na mesma origem.
+O Express serve o frontend e a API na mesma origem, então não há CORS configurado. Se o frontend rodar em outro endereço, será preciso habilitar CORS no backend e ajustar `API_BASE` em `public/js/config.js`.
