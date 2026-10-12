@@ -168,6 +168,12 @@ Execute o script `db.sql` no MySQL para criar as tabelas:
 mysql -u root -p < db.sql
 ```
 
+No Windows (PowerShell), o símbolo `<` não funciona. Use o comando abaixo, na pasta do projeto:
+
+```powershell
+mysql -u root -p -e "source db.sql"
+```
+
 Também é possível abrir o `db.sql` no MySQL Workbench ou no HeidiSQL e executá-lo. Atenção: o script apaga e recria as tabelas.
 
 ### 5. Iniciar a aplicação
