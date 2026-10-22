@@ -266,9 +266,9 @@ Veja a lista completa em [limitacoes.md](./docs/limitacoes.md).
 ## 🐳 Próximos Passos (Parte 2)
 
 Evoluções previstas para o ciclo de vida e a entrega da aplicação:
-- [ ] Criação de `Dockerfile` multi-stage para otimização da imagem.
-- [ ] Implementação de `docker-compose.yml` para orquestração local (aplicação + banco, com volume persistente).
-- [ ] Pipeline de Integração Contínua (CI) com GitHub Actions (instalação, testes, build, SAST e DAST).
+- [x] Criação de `Dockerfile` multi-stage para otimização da imagem.
+- [x] Implementação de `docker-compose.yml` para orquestração local (aplicação + banco, com volume persistente).
+- [x] Pipeline de Integração Contínua (CI) com GitHub Actions (instalação, testes, build, SAST e DAST).
 - [ ] Gestão de logs e observabilidade em ambiente produtivo.
 
 ---

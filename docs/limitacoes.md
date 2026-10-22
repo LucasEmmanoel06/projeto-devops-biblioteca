@@ -1,14 +1,13 @@
-# Limitações conhecidas
+# Limitações Conhecidas
 
-Registro do que o sistema não faz, ou faz de forma simples, para que quem receber o projeto saiba o que esperar.
+Registro do que o sistema não faz, ou faz de forma simples, para que quem receber o projeto possa evoluir sem surpresas.
 
-## Autenticação
+## Autenticação e segurança
 
-- Não há recuperação de senha nem confirmação de e-mail.
-- O token JWT vale 7 dias e não é renovado. Quando expira, é preciso entrar de novo.
-- O logout apenas apaga o token do navegador (`localStorage`). O token não é invalidado no servidor.
-- A senha exige apenas 6 caracteres, sem regras de complexidade.
-- Não há limite de tentativas de login (rate limiting).
+- Os tokens JWT expiram em 7 dias. Não há refresh token nem revogação (logout invalida apenas no cliente).
+- A senha precisa de no mínimo 6 caracteres, sem exigência de números ou símbolos.
+- Não há recuperação de senha ("esqueci minha senha").
+- Não há bloqueio por tentativas repetidas de login (brute force).
 
 ## Livros
 
@@ -28,5 +27,5 @@ Registro do que o sistema não faz, ou faz de forma simples, para que quem receb
 
 - O frontend é servido pelo próprio Express. Não há CORS configurado, então servir o frontend em outro endereço exige ajustar a API.
 - O servidor depende de um MySQL em execução e já criado antes de iniciar.
-- Os testes automatizados (`npm test`) usam dados simulados e não acessam um banco real. Não há testes de integração nem de interface.
-- Ainda não há Dockerfile, Docker Compose nem pipeline de CI/CD (previstos para a Parte 2).
+- Os testes automatizados (`npm test`) cobrem lógica de negócio, controllers e repositórios.
+- Dockerfile multi-stage, Docker Compose e pipeline de CI/CD no GitHub Actions implementados para automação de testes, lint, SAST, build e DAST.

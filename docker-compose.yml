@@ -1,0 +1,52 @@
+
+services:
+  db:
+    image: mysql:8.0
+    container_name: biblioteca-db
+    restart: always
+
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:?Defina MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${DB_NAME:-biblioteca}
+
+    ports:
+      - "3307:3306"
+
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./db.sql:/docker-entrypoint-initdb.d/init.sql:ro
+
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - 'MYSQL_PWD="$${MYSQL_ROOT_PASSWORD}" mysqladmin ping -h 127.0.0.1 -u root --silent'
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+
+    container_name: biblioteca-app
+    restart: always
+
+    depends_on:
+      db:
+        condition: service_healthy
+
+    ports:
+      - "3001:3000"
+
+    environment:
+      PORT: 3000
+      JWT_SECRET: ${JWT_SECRET:?Defina JWT_SECRET}
+      DB_HOST: db
+      DB_PORT: 3306
+      DB_USER: root
+      DB_PASSWORD: ${MYSQL_ROOT_PASSWORD:?Defina MYSQL_ROOT_PASSWORD}
+      DB_NAME: ${DB_NAME:-biblioteca}
+
+volumes:
+  db_data:
